@@ -41,7 +41,7 @@ const rewriteSlashToIndexHtml = () => {
 export default defineConfig(({ command }) => {
 
   return {
-    base: '/',
+    base: '/sam-townsend/',
     plugins: [
       vue(),
       rewriteSlashToIndexHtml(),

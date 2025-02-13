@@ -15,6 +15,7 @@
     "sitemap": "^8.0.0",
     "swiper": "^11.1.12",
     "v-lazy-image": "^2.1.1",
+    "vite": "^6.1.0",
     "vite-plugin-sitemap": "^0.7.1",
     "vue": "^3.4.29",
     "vue-carousel": "^0.18.0",
@@ -26,7 +27,6 @@
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.5",
     "gh-pages": "^6.1.1",
-    "vite": "^5.4.2",
     "vite-plugin-webp-compress": "^1.1.4"
   }
 }
