@@ -26,7 +26,7 @@ const ogUrlPortfolio = 'https://sam-townsend.netlify.app/portfolio'
 
 const routes = [
   {
-    path: '/',
+    path: '/sam-townsend',
     name: 'Home',
     component: Home,
     meta: {

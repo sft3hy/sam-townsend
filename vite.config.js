@@ -48,9 +48,10 @@ export default defineConfig(({ command }) => {
       Sitemap({
         hostname: 'https://sam-townsend.netlify.app/',
         dynamicRoutes: [
-          '/',
+          '/sam-townsend',
           '/contact',
           '/about',
+          '/portfolio'
         ],
       }),
     ],
