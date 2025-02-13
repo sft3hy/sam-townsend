@@ -15,6 +15,7 @@ import Hamburger from './icons/Hamburger.vue'
           <RouterLink to="/" @click="toggleMenu">Home</RouterLink>
           <RouterLink to="/about" @click="toggleMenu">About</RouterLink>
           <RouterLink to="/contact" @click="toggleMenu">Contact</RouterLink>
+          <RouterLink to="/portfolio" @click="toggleMenu">Portfolio</RouterLink>
         </ul>
       </nav>
     </transition>

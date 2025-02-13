@@ -277,43 +277,4 @@ export default {
   text-align: center;
   margin-top: 10px;
 }
-
-@media (max-width: 534px) {
-  .topic-container {
-    width: 100%;
-  }
-
-  .slide-content p {
-    margin-bottom: 2rem;
-  }
-}
-
-@media (min-width: 501px) and (max-width: 1000px) {
-  .topic-container {
-    width: 95%;
-  }
-}
-
-@media (min-width: 1001px) and (max-width: 1400px) {
-  .topic-container {
-    width: 90%;
-  }
-}
-
-@media (min-width: 1401px) {
-  .topic-container {
-    width: 80%;
-    /* You can adjust this value as needed */
-  }
-}
-
-
-.topic-container h1,
-p {
-  width: 100%;
-}
-
-.about-text {
-  font-size: 20px;
-}
 </style>

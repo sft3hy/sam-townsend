@@ -9,7 +9,6 @@ import HamburgerMenu from './components/HamburgerMenu.vue';
     <div class="top-bar">
       <HamburgerMenu />
     </div>
-    <!-- Other content -->
   </div>
 
 

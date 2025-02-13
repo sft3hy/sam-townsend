@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../views/HomeView.vue';
 import About from '../views/AboutView.vue';
 import Contact from '../views/ContactView.vue';
+import Portfolio from '../views/PortfolioView.vue'
 
 const metaOgTitleHome = 'Sam Townsend - Home';
 const metaDescriptionHome = "Sam is a software engineer working part time for Arcfield and getting his Master's in Data Science at UC Irvine. He graduated from UVA in 2022 and enjoys surfing, climbing, and playing video games with his friends.";
@@ -14,9 +15,14 @@ const metaOgTitleContact = 'Sam Townsend - Contact';
 const metaDescriptionContact = "Get in touch with Sam Townsend - GitHub, Email address, LinkedIn, and Instagram.";
 const metaOgDescriptionContact = "Sam Townsend's contact information";
 
+const metaOgTitlePortfolio = 'Sam Townsend - Portfolio';
+const metaDescriptionPortfolio = "Sam Townsend's portfolio.";
+const metaOgDescriptionPortfolio = "Sam Townsend portfolio";
+
 const ogUrlHome = 'https://sam-townsend.netlify.app/'
 const ogUrlAbout = 'https://sam-townsend.netlify.app/about'
 const ogUrlContact = 'https://sam-townsend.netlify.app/contact'
+const ogUrlPortfolio = 'https://sam-townsend.netlify.app/portfolio'
 
 const routes = [
   {
@@ -57,6 +63,18 @@ const routes = [
       canonical: ogUrlContact,
     }
 
+  },
+  {
+    path: '/portfolio',
+    name: 'Portfolio',
+    component: Portfolio,
+    meta: {
+      title: metaOgTitlePortfolio,
+      description: metaDescriptionPortfolio,
+      ogDescription: metaOgDescriptionPortfolio,
+      ogUrl: ogUrlPortfolio,
+      canonical: ogUrlPortfolio,
+    }
   }
 ]
 
