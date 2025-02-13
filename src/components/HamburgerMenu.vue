@@ -12,7 +12,7 @@ import Hamburger from './icons/Hamburger.vue'
 
       <nav v-if="isOpen" class="menu">
         <ul>
-          <RouterLink to="/" @click="toggleMenu">Home</RouterLink>
+          <RouterLink to="/sam-townsend" @click="toggleMenu">Home</RouterLink>
           <RouterLink to="/about" @click="toggleMenu">About</RouterLink>
           <RouterLink to="/contact" @click="toggleMenu">Contact</RouterLink>
           <RouterLink to="/portfolio" @click="toggleMenu">Portfolio</RouterLink>
