@@ -24,6 +24,7 @@
     /* Set the background color to white */
     padding: 20px;
     /* Add some padding inside the card */
+    color: #ffffff;
 }
 </style>
 
@@ -39,8 +40,9 @@
 
                 <p class="about-text">{{ site.name }}</p>
                 <img v-bind:src="getImage(site.image)" alt="Site Logo" class="responsive-preview" />
-                <p>{{ site.description }}</p>
             </a>
+            <p>{{ site.description }}</p>
+
 
         </div>
     </div>
@@ -101,10 +103,11 @@
 import { ref } from "vue";
 
 const sites = ref([
-    { name: "Website Information Extractor", url: "https://cosmic-web-gist.streamlit.app/", image: "url-parser.png", description: "Parses website contents and uses an llm to extract relevant information." },
-    { name: "Document Summarizer", url: "https://the-gist.streamlit.app/", image: "document-summarizer.png", description: "Summarizes documents using an llm." },
+    { name: "Website Information Extractor", url: "https://cosmic-web-gist.streamlit.app/", image: "url-parser.png", description: "Parses website contents and uses an LLM to extract relevant information." },
+    { name: "Document Summarizer", url: "https://the-gist.streamlit.app/", image: "document-summarizer.png", description: "Summarizes documents using an LLM." },
     { name: "NOAA GOES-18 Satellite Imagery Change Detection", url: "https://noaa-goes18-change-detection.streamlit.app/", image: "sat-image-st.png", description: "Downloads NOAA GOES-18 satellite imagery from s3, combines multiple spectra to create full color images from today and yesterday, and calls a vision model to describe changes in the imagery." },
-    { name: "Dashboard Creator", url: "https://cosmic-dashboard.streamlit.app/", image: "llm-dboard.png", description: "Users upload data files and ask for a chart from their data, and an llm writes streamlit code to visualize their data." }
+    { name: "Dashboard Creator", url: "https://cosmic-dashboard.streamlit.app/", image: "llm-dboard.png", description: "Users upload data files and ask for a chart from their data, and an LLM writes streamlit code to visualize their data." },
+    { name: "Custom Brew", url: "https://custom-brew.streamlit.app/", image: "custom-brew.png", description: "Users can sign up for a daily newsletter and choose from several topics. An LLM then parses NewsAPI's output for that topic to choose the most relevant articles, and another LLM then summarizes each article before the email is sent to the correct users." }
 ]);
 
 const getImage = (imageName) => {
