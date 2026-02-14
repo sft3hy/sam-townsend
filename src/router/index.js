@@ -4,29 +4,29 @@ import About from '../views/AboutView.vue';
 import Contact from '../views/ContactView.vue';
 import Portfolio from '../views/PortfolioView.vue'
 
-const metaOgTitleHome = 'Sam Townsend - Home';
-const metaDescriptionHome = "Sam is a software engineer working part time for Arcfield and getting his Master's in Data Science at UC Irvine. He graduated from UVA in 2022 and enjoys surfing, climbing, and playing video games with his friends.";
+const metaOgTitleHome = 'Sam Townsend - Software Engineer & Data Scientist';
+const metaDescriptionHome = "Sam Townsend is a Software Engineer and Data Science Master's student at UC Irvine. Expert in full-stack development, Python, and cloud technologies. View his portfolio and projects.";
 
-const metaOgTitleAbout = 'Sam Townsend - About';
-const metaDescriptionAbout = "Sam Townsend's biographical information. Pictures on this page include travelling and surfing.";
-const metaOgDescriptionAbout = "Sam Townsend's biographical information";
+const metaOgTitleAbout = 'About Sam Townsend - Software Engineer';
+const metaDescriptionAbout = "Learn about Sam Townsend, a software engineer with a passion for surfing, climbing, and technology. Discover his background, education, and interests.";
+const metaOgDescriptionAbout = "Biography of Sam Townsend, Software Engineer and Data Science student.";
 
-const metaOgTitleContact = 'Sam Townsend - Contact';
-const metaDescriptionContact = "Get in touch with Sam Townsend - GitHub, Email address, LinkedIn, and Instagram.";
-const metaOgDescriptionContact = "Sam Townsend's contact information";
+const metaOgTitleContact = 'Contact Sam Townsend';
+const metaDescriptionContact = "Connect with Sam Townsend. Reach out via Email, LinkedIn, GitHub, or Instagram for collaboration or inquiries.";
+const metaOgDescriptionContact = "Contact information for Sam Townsend.";
 
-const metaOgTitlePortfolio = 'Sam Townsend - Portfolio';
-const metaDescriptionPortfolio = "Sam Townsend's portfolio.";
-const metaOgDescriptionPortfolio = "Sam Townsend portfolio";
+const metaOgTitlePortfolio = 'Sam Townsend - Portfolio & Projects';
+const metaDescriptionPortfolio = "Explore Sam Townsend's software engineering portfolio. Featuring projects in web development, data science, and more.";
+const metaOgDescriptionPortfolio = "Sam Townsend's project portfolio.";
 
-const ogUrlHome = 'https://sam-townsend.netlify.app/'
-const ogUrlAbout = 'https://sam-townsend.netlify.app/about'
-const ogUrlContact = 'https://sam-townsend.netlify.app/contact'
-const ogUrlPortfolio = 'https://sam-townsend.netlify.app/portfolio'
+const ogUrlHome = 'https://sft3hy.github.io/sam-townsend/'
+const ogUrlAbout = 'https://sft3hy.github.io/sam-townsend/about/'
+const ogUrlContact = 'https://sft3hy.github.io/sam-townsend/contact/'
+const ogUrlPortfolio = 'https://sft3hy.github.io/sam-townsend/portfolio/'
 
 const routes = [
   {
-    path: '/sam-townsend',
+    path: '/',
     name: 'Home',
     component: Home,
     meta: {
@@ -39,7 +39,7 @@ const routes = [
 
   },
   {
-    path: '/about',
+    path: '/about/',
     name: 'About',
     component: About,
     meta: {
@@ -52,7 +52,7 @@ const routes = [
 
   },
   {
-    path: '/contact',
+    path: '/contact/',
     name: 'Contact',
     component: Contact,
     meta: {
@@ -65,7 +65,7 @@ const routes = [
 
   },
   {
-    path: '/portfolio',
+    path: '/portfolio/',
     name: 'Portfolio',
     component: Portfolio,
     meta: {
@@ -79,7 +79,7 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory('/'),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes
 
 });

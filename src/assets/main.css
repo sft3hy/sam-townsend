@@ -1,61 +1,97 @@
 @import './base.css';
 
 #app {
-  max-width: 1280px;
+  max-width: 1440px;
+  /* Wider container for modern look */
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0 2rem;
   font-weight: normal;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-a,
-.green {
-  text-decoration: none;
-  color: #8fa9f7;
-  transition: 0.4s;
-  padding: 3px;
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  color: var(--color-heading);
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+  /* Tighten headings */
 }
 
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(217, 100%, 76%, 0.204);
-  }
+h1 {
+  /* Modern Hero Style */
+  font-size: 3.5rem;
+  background: linear-gradient(135deg, var(--vt-c-dark-blue) 0%, var(--vt-c-accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1.5rem;
 }
 
-@media (max-width: 534px) {
-  .topic-container {
-    width: 100%;
-  }
-
-  .slide-content p {
-    margin-bottom: 2rem;
-  }
-}
-
-@media (min-width: 501px) and (max-width: 1000px) {
-  .topic-container {
-    width: 95%;
-  }
-}
-
-@media (min-width: 1001px) and (max-width: 1400px) {
-  .topic-container {
-    width: 90%;
-  }
-}
-
-@media (min-width: 1401px) {
-  .topic-container {
-    width: 80%;
-    /* You can adjust this value as needed */
-  }
-}
-
-
-.topic-container h1,
 p {
-  width: 100%;
+  margin-bottom: 1.5rem;
+  font-size: 1.125rem;
+  /* 18px */
+  color: var(--color-text);
 }
 
-.about-text {
-  font-size: 20px;
+/* Links & Buttons */
+a {
+  text-decoration: none;
+  color: var(--vt-c-accent);
+  transition: var(--transition-fast);
+  font-weight: 500;
+  position: relative;
+}
+
+a:hover {
+  color: var(--vt-c-accent-hover);
+}
+
+/* Utility / Layout Helpers */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+}
+
+
+.topic-container {
+  width: 100%;
+  max-width: 900px;
+  /* Optimal reading width */
+  margin: 0 auto 4rem auto;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity var(--transition-medium);
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  #app {
+    padding: 0 1.5rem;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
 }

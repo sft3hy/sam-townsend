@@ -1,167 +1,181 @@
 <script setup>
 import { RouterLink } from 'vue-router'
 import Hamburger from './icons/Hamburger.vue'
-</script>
-<template>
-  <div>
-    <button @click="toggleMenu" class="hamburger" aria-label="menu-dropdown" title="menu-dropdown">
-      <Hamburger />
-      Menu
-    </button>
-    <transition name="fade">
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 
-      <nav v-if="isOpen" class="menu">
+const isOpen = ref(false)
+const menuRef = ref(null)
+
+const toggleMenu = () => {
+  isOpen.value = !isOpen.value
+}
+
+const closeMenu = () => {
+  isOpen.value = false
+}
+
+const handleClickOutside = (event) => {
+  if (menuRef.value && !menuRef.value.contains(event.target)) {
+    isOpen.value = false
+  }
+}
+
+onMounted(() => {
+  document.addEventListener('click', handleClickOutside)
+})
+
+onBeforeUnmount(() => {
+  document.removeEventListener('click', handleClickOutside)
+})
+</script>
+
+<template>
+  <div class="nav-container" ref="menuRef">
+    <button @click="toggleMenu" class="hamburger-btn" aria-label="Menu" :class="{ 'is-active': isOpen }">
+      <div class="hamburger-box">
+        <div class="hamburger-inner"></div>
+      </div>
+    </button>
+
+    <transition name="dropdown">
+      <nav v-if="isOpen" class="nav-dropdown glass-panel">
         <ul>
-          <RouterLink to="/sam-townsend" @click="toggleMenu">Home</RouterLink>
-          <RouterLink to="/about" @click="toggleMenu">About</RouterLink>
-          <RouterLink to="/contact" @click="toggleMenu">Contact</RouterLink>
-          <RouterLink to="/portfolio" @click="toggleMenu">Portfolio</RouterLink>
+          <li><RouterLink to="/" @click="closeMenu">Home</RouterLink></li>
+          <li><RouterLink to="/about/" @click="closeMenu">About</RouterLink></li>
+          <li><RouterLink to="/portfolio/" @click="closeMenu">Portfolio</RouterLink></li>
+          <li><RouterLink to="/contact/" @click="closeMenu">Contact</RouterLink></li>
         </ul>
       </nav>
     </transition>
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      isOpen: false
-    };
-  },
-  methods: {
-    toggleMenu() {
-      this.isOpen = !this.isOpen;
-    },
-    handleClickOutside(event) {
-      if (!this.$el.contains(event.target)) {
-        this.isOpen = false;
-      }
-    }
-  },
-  mounted() {
-    document.addEventListener('click', this.handleClickOutside);
-  },
-  beforeDestroy() {
-    document.removeEventListener('click', this.handleClickOutside);
-  }
-};
-</script>
+<style scoped>
+.nav-container {
+  position: relative;
+}
 
-<style>
-.hamburger {
-  position: absolute;
-  /* Change to absolute to position it within the .top-bar */
-  top: 10px;
-  /* Adjust as needed */
-  right: 10px;
-  /* Adjust as needed */
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  width: 50px;
-  height: 50px;
-  background: transparent;
+.hamburger-btn {
+  background: none;
   border: none;
   cursor: pointer;
-}
-
-.hamburger span {
-  width: 100%;
-  height: 3px;
-  background: black;
-}
-
-.menu {
-  position: fixed;
-  right: 0;
-  background: #f3f7fc;
+  padding: 10px;
   display: flex;
-  flex-direction: column;
-  margin-right: 1rem;
-  /* Ensures the menu items are in a column */
-  margin-top: 4rem;
-  border-radius: 0.2rem;
-
+  align-items: center;
+  justify-content: center;
 }
 
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s ease, display 0.5s ease;
+/* CSS Hamburger Animation */
+.hamburger-box {
+  width: 24px;
+  height: 24px;
+  position: relative;
 }
 
-.fade-enter,
-.fade-leave-to
+.hamburger-inner, .hamburger-inner::before, .hamburger-inner::after {
+  width: 24px;
+  height: 2px;
+  background-color: var(--color-heading);
+  border-radius: 4px;
+  position: absolute;
+  transition-property: transform, opacity;
+  transition-duration: 0.15s;
+  transition-timing-function: ease;
+}
 
-/* .fade-leave-active in <2.1.8 */
-  {
+.hamburger-inner {
+  top: 50%;
+  margin-top: -1px;
+}
+
+.hamburger-inner::before, .hamburger-inner::after {
+  content: "";
+  display: block;
+}
+
+.hamburger-inner::before {
+  top: -8px;
+}
+
+.hamburger-inner::after {
+  bottom: -8px;
+}
+
+/* Active State for Hamburger */
+.is-active .hamburger-inner {
+  transform: rotate(45deg);
+}
+
+.is-active .hamburger-inner::before {
+  top: 0;
   opacity: 0;
 }
 
-.fade-enter-to {
-  opacity: 1;
+.is-active .hamburger-inner::after {
+  bottom: 0;
+  transform: rotate(-90deg);
 }
 
+/* Dropdown Menu */
+.nav-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 1rem;
+  min-width: 200px;
+  background: #ffffff !important;
+  border: 1px solid var(--color-border);
+  padding: 1rem;
+  z-index: 2000;
+  transform-origin: top right;
+  box-shadow: var(--shadow-lg);
+}
 
-.menu ul {
+@media (prefers-color-scheme: dark) {
+  .nav-dropdown {
+    background: #1e1e1e !important;
+    border-color: #333;
+  }
+}
+
+.nav-dropdown ul {
   list-style: none;
   padding: 0;
   margin: 0;
-  /* border: 1px solid rgb(116, 213, 134); */
-  font-size: 20px;
 }
 
-.menu li {
-  padding: 10px;
+.nav-dropdown li {
+  margin-bottom: 0.5rem;
 }
 
-.menu a {
-  text-decoration: none;
-  color: black;
-  border: 1px solid #384355;
-  border-radius: 0.2rem;
-
+.nav-dropdown li:last-child {
+  margin-bottom: 0;
 }
 
-
-nav {
-  width: fit-content;
-  height: fit-content;
-  display: flex;
-  flex-direction: column;
-  /* Ensures the links are in a column */
-}
-
-nav a.router-link-exact-active {
-  color: #8fa9f7;
-  font-weight: bold;
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
+.nav-dropdown a {
   display: block;
-  /* Makes each link take up the full width */
-  padding: 0.5rem 1rem;
-  /* Adjust padding as needed */
-  /* Ensures the links are full width */
-  text-align: center;
+  padding: 0.75rem 1rem;
+  color: var(--color-text);
+  font-weight: 500;
+  border-radius: var(--radius-sm);
+  transition: all 0.2s;
 }
 
+.nav-dropdown a:hover,
+.nav-dropdown a.router-link-exact-active {
+  background: var(--vt-c-accent);
+  color: white;
+}
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
+/* Dropdown Transition */
+.dropdown-enter-active,
+.dropdown-leave-active {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
 
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+.dropdown-enter-from,
+.dropdown-leave-to {
+  opacity: 0;
+  transform: translateY(-10px) scale(0.95);
 }
 </style>

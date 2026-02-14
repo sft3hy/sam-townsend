@@ -4,36 +4,77 @@ import HamburgerMenu from './components/HamburgerMenu.vue';
 </script>
 
 <template>
-
   <div id="app">
-    <div class="top-bar">
+    <header class="top-bar glass-panel">
+      <div class="logo">
+        <RouterLink to="/">Sam Townsend</RouterLink>
+      </div>
       <HamburgerMenu />
-    </div>
+    </header>
+
+    <main class="page-content">
+      <RouterView v-slot="{ Component }">
+        <transition name="fade" mode="out-in">
+          <component :is="Component" />
+        </transition>
+      </RouterView>
+    </main>
+
+    <footer class="site-footer">
+      <p>&copy; {{ new Date().getFullYear() }} Sam Townsend</p>
+    </footer>
   </div>
-
-
-  <RouterView />
 </template>
 
-
-
-
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
+.top-bar {
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 95%;
+  max-width: 1400px;
+  height: 4rem;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+  border-radius: var(--radius-lg);
+  /* Glass effect handled by global .glass-panel class */
 }
 
-.top-bar {
-  width: 100%;
-  height: 4.2rem;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1000;
-  background-color: #f3f7fc;
+.logo a {
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--color-heading);
+  letter-spacing: -0.02em;
+}
 
-  padding: 10px;
-  box-shadow: 0 2px 5px rgba(255, 249, 249, 0.1);
+.page-content {
+  padding-top: 8rem; /* Space for fixed header */
+  flex: 1;
+  width: 100%;
+}
+
+.site-footer {
+  padding: 2rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--color-text);
+  margin-top: auto;
+  opacity: 0.7;
+}
+
+/* Transitions */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+  transform: translateY(10px);
 }
 </style>
