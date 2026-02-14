@@ -19,10 +19,12 @@ export default defineConfig(({ command }) => {
           '/',
           '/contact',
           '/about',
-          '/portfolio'
+          '/portfolio',
+          '/travel'
         ],
       }),
     ],
+    assetsInclude: ['**/*.JPG', '**/*.JPEG', '**/*.GIF', '**/*.PNG'],
     resolve: {
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url))

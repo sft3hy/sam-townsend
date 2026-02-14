@@ -1,13 +1,27 @@
 <script setup>
-import { RouterView } from 'vue-router';
+import { computed } from 'vue';
+import { RouterView, RouterLink, useRoute } from 'vue-router';
 import HamburgerMenu from './components/HamburgerMenu.vue';
+import travelPhotos from '@/data/travel-photos.json';
+
+const route = useRoute();
+const pageTitle = computed(() => {
+  if (route.name === 'TravelState' && route.params.state) {
+    const slug = route.params.state;
+    const stateName = Object.keys(travelPhotos).find(
+      state => state.toLowerCase().replace(/\s+/g, '-') === slug
+    );
+    return stateName || 'Travel Gallery';
+  }
+  return route.name || 'Sam Townsend';
+});
 </script>
 
 <template>
   <div id="app">
     <header class="top-bar glass-panel">
       <div class="logo">
-        <RouterLink to="/">Sam Townsend</RouterLink>
+        <RouterLink to="/">{{ pageTitle }}</RouterLink>
       </div>
       <HamburgerMenu />
     </header>
@@ -55,6 +69,7 @@ import HamburgerMenu from './components/HamburgerMenu.vue';
   padding-top: 8rem; /* Space for fixed header */
   flex: 1;
   width: 100%;
+  min-width: 0; /* Allow flex item to shrink below content size */
 }
 
 .site-footer {

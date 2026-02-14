@@ -2,7 +2,9 @@ import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../views/HomeView.vue';
 import About from '../views/AboutView.vue';
 import Contact from '../views/ContactView.vue';
-import Portfolio from '../views/PortfolioView.vue'
+import Portfolio from '../views/PortfolioView.vue';
+import Travel from '../views/TravelView.vue';
+import TravelState from '../views/TravelStateView.vue'
 
 const metaOgTitleHome = 'Sam Townsend - Software Engineer & Data Scientist';
 const metaDescriptionHome = "Sam Townsend is a Software Engineer and Data Science Master's student at UC Irvine. Expert in full-stack development, Python, and cloud technologies. View his portfolio and projects.";
@@ -19,10 +21,15 @@ const metaOgTitlePortfolio = 'Sam Townsend - Portfolio & Projects';
 const metaDescriptionPortfolio = "Explore Sam Townsend's software engineering portfolio. Featuring projects in web development, data science, and more.";
 const metaOgDescriptionPortfolio = "Sam Townsend's project portfolio.";
 
+const metaOgTitleTravel = 'Travel Gallery - Sam Townsend';
+const metaDescriptionTravel = "Browse Sam Townsend's travel photography from adventures across different states. View photos on interactive maps.";
+const metaOgDescriptionTravel = "Sam Townsend's travel photo gallery.";
+
 const ogUrlHome = 'https://sft3hy.github.io/sam-townsend/'
 const ogUrlAbout = 'https://sft3hy.github.io/sam-townsend/about/'
 const ogUrlContact = 'https://sft3hy.github.io/sam-townsend/contact/'
 const ogUrlPortfolio = 'https://sft3hy.github.io/sam-townsend/portfolio/'
+const ogUrlTravel = 'https://sft3hy.github.io/sam-townsend/travel/'
 
 const routes = [
   {
@@ -74,6 +81,30 @@ const routes = [
       ogDescription: metaOgDescriptionPortfolio,
       ogUrl: ogUrlPortfolio,
       canonical: ogUrlPortfolio,
+    }
+  },
+  {
+    path: '/travel/',
+    name: 'Travel',
+    component: Travel,
+    meta: {
+      title: metaOgTitleTravel,
+      description: metaDescriptionTravel,
+      ogDescription: metaOgDescriptionTravel,
+      ogUrl: ogUrlTravel,
+      canonical: ogUrlTravel,
+    }
+  },
+  {
+    path: '/travel/:state',
+    name: 'TravelState',
+    component: TravelState,
+    meta: {
+      title: metaOgTitleTravel,
+      description: metaDescriptionTravel,
+      ogDescription: metaOgDescriptionTravel,
+      ogUrl: ogUrlTravel,
+      canonical: ogUrlTravel,
     }
   }
 ]

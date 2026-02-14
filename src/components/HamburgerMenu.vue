@@ -43,6 +43,7 @@ onBeforeUnmount(() => {
           <li><RouterLink to="/" @click="closeMenu">Home</RouterLink></li>
           <li><RouterLink to="/about/" @click="closeMenu">About</RouterLink></li>
           <li><RouterLink to="/portfolio/" @click="closeMenu">Portfolio</RouterLink></li>
+          <li><RouterLink to="/travel/" @click="closeMenu">Travel</RouterLink></li>
           <li><RouterLink to="/contact/" @click="closeMenu">Contact</RouterLink></li>
         </ul>
       </nav>

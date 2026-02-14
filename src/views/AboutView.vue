@@ -3,8 +3,13 @@ import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
 import { preloadImage } from '@/utils/common';
 import VLazyImage from 'v-lazy-image';
 
-import 'vue3-carousel/dist/carousel.css';
-import { Carousel, Slide, Navigation as CarouselNavigation, Pagination as CarouselPagination } from 'vue3-carousel';
+import 'swiper/css';
+import 'swiper/css/free-mode';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/mousewheel';
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import { FreeMode, Navigation, Pagination, Mousewheel } from 'swiper/modules';
 
 import backpackingCamino from '../assets/images/about_pictures/backpackingCamino.jpeg';
 import ChicagoBean from '../assets/images/about_pictures/ChicagoBean.jpeg';
@@ -72,31 +77,53 @@ onBeforeUnmount(() => {
 
     <div class="carousel-section glass-panel">
       <h3>Adventures</h3>
-      <Carousel :items-to-show="isDesktop ? 2.5 : 1" :wrap-around="true" :transition="500">
-        <Slide v-for="(image, index) in images" :key="index">
-          <div class="carousel__item">
-            <div class="image-card">
-              <v-lazy-image :src="image.src" :alt="image.alt" class="slide-image" />
+      <div class="swiper-container">
+        <swiper
+          :modules="[FreeMode, Navigation, Pagination, Mousewheel]"
+          :slides-per-view="isDesktop ? 2.5 : 1.2"
+          :space-between="20"
+          :free-mode="{
+            enabled: true,
+            momentum: false,
+          }"
+          :mousewheel="{
+            forceToAxis: true,
+            sensitivity: 1,
+          }"
+          :navigation="{
+            prevEl: '.swiper-button-prev',
+            nextEl: '.swiper-button-next',
+          }"
+          :pagination="{ clickable: true }"
+          class="adventures-swiper"
+        >
+          <swiper-slide v-for="(image, index) in images" :key="index">
+            <div class="carousel__item">
+              <div class="image-card">
+                <v-lazy-image :src="image.src" :alt="image.alt" class="slide-image" />
+              </div>
               <div class="slide-caption glass-panel">
                 {{ image.caption }}
               </div>
             </div>
-          </div>
-        </Slide>
-        <template #addons>
-          <CarouselNavigation />
-          <CarouselPagination />
-        </template>
-      </Carousel>
+          </swiper-slide>
+        </swiper>
+        <!-- Navigation Buttons moved outside swiper element for better visibility -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped>
 .about-container {
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   padding-bottom: 4rem;
+  box-sizing: border-box;
+  min-width: 0;
 }
 
 .split-section {
@@ -104,10 +131,12 @@ onBeforeUnmount(() => {
   gap: 3rem;
   margin-bottom: 3rem;
   align-items: flex-start;
+  width: 100%;
 }
 
 .content-side {
   flex: 1;
+  min-width: 0; /* Allow flex item to shrink below content size */
 }
 
 .divider {
@@ -115,12 +144,17 @@ onBeforeUnmount(() => {
   background: var(--color-border);
   align-self: stretch;
   margin: 1rem 0;
+  flex-shrink: 0;
 }
 
 .carousel-section {
   text-align: center;
-  overflow: hidden; /* Contain carousel overflow */
   padding: 3rem 1rem;
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden; /* Prevent swiper from expanding the container */
 }
 
 .carousel-section h3 {
@@ -128,8 +162,76 @@ onBeforeUnmount(() => {
   color: var(--vt-c-accent);
 }
 
+.swiper-container {
+  position: relative;
+  width: 100%;
+  max-width: 100%; /* Ensure it doesn't exceed parent */
+  margin: 0 auto;
+  padding: 0 3.5rem; /* Space for arrows */
+  box-sizing: border-box;
+  overflow: visible; /* Allow arrows to be visible outside if needed, but parent hides overflow */
+}
+
+/* Swiper Specific Styling */
+.adventures-swiper {
+  padding: 1rem 0 3.5rem 0; /* Space for pagination */
+  width: 100%;
+}
+
+/* Custom Swiper Navigation */
+.swiper-button-prev,
+.swiper-button-next {
+  background-color: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 50%;
+  color: var(--vt-c-accent);
+  border: 1px solid var(--glass-border);
+  width: 3.25rem;
+  height: 3.25rem;
+  transition: all 0.3s ease;
+  top: 45%;
+  position: absolute;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.swiper-button-prev {
+  left: 0.25rem;
+}
+
+.swiper-button-next {
+  right: 0.25rem;
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  background-color: var(--vt-c-accent);
+  color: white;
+  transform: scale(1.1);
+}
+
+/* Hide default swiper internal buttons if they appear */
+:deep(.swiper-button-disabled) {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+:deep(.swiper-slide) {
+  height: auto;
+}
+
 .carousel__item {
-  padding: 1rem;
+  padding: 0.5rem;
   height: 100%;
 }
 
@@ -139,8 +241,13 @@ onBeforeUnmount(() => {
   overflow: hidden;
   box-shadow: var(--shadow-md);
   transition: transform 0.3s ease;
-  height: 400px; /* Fixed height for consistency */
+  height: 400px;
   width: 100%;
+  cursor: grab;
+}
+
+.image-card:active {
+  cursor: grabbing;
 }
 
 .image-card:hover {
@@ -154,44 +261,29 @@ onBeforeUnmount(() => {
 }
 
 .slide-caption {
-  position: absolute;
-  bottom: 1rem;
-  left: 1rem;
-  right: 1rem;
-  padding: 0.5rem;
-  font-size: 0.9rem;
-  border-radius: var(--radius-sm);
-  background: rgba(255, 255, 255, 0.95);
-  color: var(--color-heading);
+  margin-top: 1.25rem;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.95rem;
+  color: var(--color-text);
+  display: inline-block;
+  max-width: 90%;
+  line-height: 1.4;
 }
 
-/* Customize Carousel Navigation */
-:deep(.carousel__prev),
-:deep(.carousel__next) {
-  background-color: var(--glass-bg);
-  border-radius: 50%;
-  color: var(--vt-c-accent);
-  border: 1px solid var(--glass-border);
-  width: 3rem;
-  height: 3rem;
-  transition: all 0.2s;
-}
-
-:deep(.carousel__prev:hover),
-:deep(.carousel__next:hover) {
-  background-color: var(--vt-c-accent);
-  color: white;
-}
-
-:deep(.carousel__pagination-button::after) {
-  background-color: var(--color-border-hover);
-  border-radius: 4px;
-  width: 30px;
+/* Custom Swiper Pagination */
+:deep(.swiper-pagination-bullet) {
+  background: var(--color-border-hover);
+  opacity: 0.5;
+  width: 25px;
   height: 4px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
 }
 
-:deep(.carousel__pagination-button--active::after) {
-  background-color: var(--vt-c-accent);
+:deep(.swiper-pagination-bullet-active) {
+  background: var(--vt-c-accent);
+  opacity: 1;
+  width: 40px;
 }
 
 @media (max-width: 900px) {
@@ -207,7 +299,46 @@ onBeforeUnmount(() => {
   }
 
   .image-card {
+    height: 350px;
+    width: 100%;
+  }
+
+  .swiper-container {
+    padding: 0 3rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .image-card {
     height: 300px;
+  }
+  
+  .carousel__item {
+    padding: 0.25rem;
+  }
+
+  .swiper-container {
+    padding: 0 2rem;
+  }
+
+  .swiper-button-prev,
+  .swiper-button-next {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .swiper-button-prev::after,
+  .swiper-button-next::after {
+    font-size: 1rem;
+  }
+
+  .swiper-button-prev {
+    left: 0.125rem;
+  }
+
+  .swiper-button-next {
+    right: 0.125rem;
   }
 }
 </style>
+
