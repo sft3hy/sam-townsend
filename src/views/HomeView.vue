@@ -13,7 +13,7 @@ import Climbing from '../assets/images/home_picture/Climbing.jpeg';
       <div class="text-section">
         <h1 class="animate-title">Howdy!</h1>
         <p class="home-text">
-          Glad you could make it. Welcome to my personal slice of the internet built with <a href="https://vuejs.org" target="_blank" rel="noopener">Vue JS</a>.
+          Glad you could make it. Welcome to my site built with <a href="https://vuejs.org" target="_blank" rel="noopener">Vue JS</a>.
         </p>
         <div class="cta-group">
           <RouterLink to="/about" class="btn btn-primary">About Me</RouterLink>

@@ -7,6 +7,8 @@ import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import { useTravelImages } from '@/composables/useTravelImages';
 
+import { useHead } from '@vueuse/head';
+
 const { getImageUrl } = useTravelImages();
 
 const route = useRoute();
@@ -20,7 +22,7 @@ const stateName = computed(() => {
   const slug = route.params.state;
   return Object.keys(travelPhotos).find(
     state => state.toLowerCase().replace(/\s+/g, '-') === slug
-  );
+  ) || slug; // Fallback to slug if not found
 });
 
 // Get photos for this state
@@ -31,6 +33,42 @@ const statePhotos = computed(() => {
 // Filter photos with GPS data for map display
 const photosWithGPS = computed(() => {
   return statePhotos.value.filter(p => p.hasGPS && p.lat && p.lng);
+});
+
+// Dynamic Head Management
+useHead({
+  title: computed(() => `${stateName.value} Travel Gallery - Sam Townsend`),
+  meta: [
+    {
+      name: 'description',
+      content: computed(() => `Explore ${statePhotos.value.length} travel photos from ${stateName.value} by Sam Townsend.`),
+    },
+    {
+      property: 'og:title',
+      content: computed(() => `${stateName.value} Travel Gallery`),
+    },
+    {
+      property: 'og:description',
+      content: computed(() => `View ${statePhotos.value.length} photos and locations from my trip to ${stateName.value}.`),
+    },
+     {
+      property: 'og:image',
+      content: computed(() => {
+        if (statePhotos.value.length > 0) {
+          const firstPhoto = statePhotos.value[0];
+          const imgPath = getImageUrl(firstPhoto.path);
+          // Check if path is already absolute or relative to base
+          if (imgPath.startsWith('http')) return imgPath;
+          return `https://sft3hy.github.io${imgPath}`;
+        }
+        return 'https://sft3hy.github.io/sam-townsend/assets/surfingOBX.jpeg';
+      }),
+    },
+    {
+      property: 'og:url',
+      content: computed(() => `https://sft3hy.github.io/sam-townsend/travel/${route.params.state}`),
+    }
+  ],
 });
 
 // Initialize map

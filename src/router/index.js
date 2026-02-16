@@ -4,7 +4,12 @@ import About from '../views/AboutView.vue';
 import Contact from '../views/ContactView.vue';
 import Portfolio from '../views/PortfolioView.vue';
 import Travel from '../views/TravelView.vue';
-import TravelState from '../views/TravelStateView.vue'
+import TravelState from '../views/TravelStateView.vue';
+import homeImg from '@/assets/images/home_picture/Climbing.jpeg';
+import aboutImg from '@/assets/images/about_pictures/backpackingCamino.jpeg';
+import contactImg from '@/assets/images/about_pictures/friends.jpeg';
+import portfolioImg from '@/assets/images/about_pictures/SenecaBase.jpeg';
+import travelImg from '@/assets/images/about_pictures/surfingMaui.jpeg';
 
 const metaOgTitleHome = 'Sam Townsend - Software Engineer & Data Scientist';
 const metaDescriptionHome = "Sam Townsend is a Software Engineer and Data Science Master's student at UC Irvine. Expert in full-stack development, Python, and cloud technologies. View his portfolio and projects.";
@@ -31,7 +36,7 @@ const ogUrlContact = 'https://sft3hy.github.io/sam-townsend/contact/'
 const ogUrlPortfolio = 'https://sft3hy.github.io/sam-townsend/portfolio/'
 const ogUrlTravel = 'https://sft3hy.github.io/sam-townsend/travel/'
 
-const routes = [
+export const routes = [
   {
     path: '/',
     name: 'Home',
@@ -42,6 +47,7 @@ const routes = [
       ogDescription: metaDescriptionHome,
       ogUrl: ogUrlHome,
       canonical: ogUrlHome,
+      ogImage: homeImg,
     }
 
   },
@@ -55,6 +61,7 @@ const routes = [
       ogDescription: metaOgDescriptionAbout,
       ogUrl: ogUrlAbout,
       canonical: ogUrlAbout,
+      ogImage: aboutImg,
     }
 
   },
@@ -68,6 +75,7 @@ const routes = [
       ogDescription: metaOgDescriptionContact,
       ogUrl: ogUrlContact,
       canonical: ogUrlContact,
+      ogImage: contactImg,
     }
 
   },
@@ -81,6 +89,7 @@ const routes = [
       ogDescription: metaOgDescriptionPortfolio,
       ogUrl: ogUrlPortfolio,
       canonical: ogUrlPortfolio,
+      ogImage: portfolioImg,
     }
   },
   {
@@ -93,6 +102,7 @@ const routes = [
       ogDescription: metaOgDescriptionTravel,
       ogUrl: ogUrlTravel,
       canonical: ogUrlTravel,
+      ogImage: travelImg,
     }
   },
   {
@@ -105,14 +115,9 @@ const routes = [
       ogDescription: metaOgDescriptionTravel,
       ogUrl: ogUrlTravel,
       canonical: ogUrlTravel,
+      ogImage: travelImg, // Fallback, will be overridden by component
     }
   }
 ]
 
-const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  routes
-
-});
-
-export default router;
+export default routes;

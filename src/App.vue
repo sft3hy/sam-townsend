@@ -1,6 +1,7 @@
 <script setup>
 import { computed } from 'vue';
 import { RouterView, RouterLink, useRoute } from 'vue-router';
+import { useHead } from '@vueuse/head';
 import HamburgerMenu from './components/HamburgerMenu.vue';
 import travelPhotos from '@/data/travel-photos.json';
 
@@ -14,6 +15,51 @@ const pageTitle = computed(() => {
     return stateName || 'Travel Gallery';
   }
   return route.name || 'Sam Townsend';
+});
+
+useHead({
+  title: computed(() => route.meta.title || 'Sam Townsend'),
+  meta: [
+    {
+      name: 'description',
+      content: computed(() => route.meta.description || 'Sam Townsend - Software Engineer'),
+    },
+    {
+      property: 'og:title',
+      content: computed(() => route.meta.title || 'Sam Townsend'),
+    },
+    {
+      property: 'og:description',
+      content: computed(() => route.meta.ogDescription || route.meta.description || 'Sam Townsend - Software Engineer'),
+    },
+    {
+      property: 'og:url',
+      content: computed(() => route.meta.ogUrl || 'https://sft3hy.github.io/sam-townsend/'),
+    },
+    {
+      property: 'og:image',
+      content: computed(() => {
+        const image = route.meta.ogImage;
+        if (!image) return 'https://sft3hy.github.io/sam-townsend/assets/surfingOBX.jpeg';
+        if (image.startsWith('http')) return image;
+        return `https://sft3hy.github.io${image}`;
+      }),
+    },
+    {
+      property: 'og:type',
+      content: 'website',
+    },
+    {
+      name: 'twitter:card',
+      content: 'summary_large_image',
+    },
+  ],
+  link: [
+    {
+      rel: 'canonical',
+      href: computed(() => route.meta.canonical || 'https://sft3hy.github.io/sam-townsend/'),
+    },
+  ],
 });
 </script>
 
