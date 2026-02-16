@@ -1,13 +1,29 @@
-<script setup>
+// import 'leaflet/dist/leaflet.css'; // Keep CSS if it parses fine, typically yes.
+// Start of script
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
 import { useRoute, RouterLink } from 'vue-router';
 import travelPhotos from '@/data/travel-photos.json';
 import PhotoLightbox from '@/components/PhotoLightbox.vue';
 import 'leaflet/dist/leaflet.css';
-import L from 'leaflet';
+// import L from 'leaflet'; // Removed static import
 import { useTravelImages } from '@/composables/useTravelImages';
 
 import { useHead } from '@vueuse/head';
+
+const { getImageUrl } = useTravelImages();
+
+const route = useRoute();
+const mapContainer = ref(null);
+const map = ref(null);
+const selectedPhoto = ref(null);
+const lightboxOpen = ref(false);
+
+// ... (computed properties skipped in replace block if I can match on context) ...
+// Actually I need to be careful with replace_file_content.
+// I can target the imports and onMounted separately or together.
+
+// Let's replace the top imports first.
+
 
 const { getImageUrl } = useTravelImages();
 
