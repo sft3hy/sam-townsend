@@ -29,7 +29,7 @@ export default defineConfig(({ command }) => {
     plugins: [
       vue(),
       Sitemap({
-        hostname: 'https://sft3hy.github.io/sam-townsend/',
+        hostname: 'https://sft3hy.github.io/sam-townsend',
         dynamicRoutes: allRoutes,
       }),
     ],

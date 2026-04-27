@@ -11,9 +11,9 @@ import Climbing from '../assets/images/home_picture/Climbing.jpeg';
   <main class="home-container">
     <div class="hero-content">
       <div class="text-section">
-        <h1 class="animate-title">Howdy!</h1>
+        <h1 class="animate-title">Sam Townsend</h1>
         <p class="home-text">
-          Glad you could make it. Welcome to my site built with <a href="https://vuejs.org" target="_blank" rel="noopener">Vue JS</a>.
+          Software Engineer & Data Scientist. Welcome to my personal website and portfolio.
         </p>
         <div class="cta-group">
           <RouterLink to="/about" class="btn btn-primary">About Me</RouterLink>

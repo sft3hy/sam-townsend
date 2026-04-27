@@ -31,10 +31,10 @@ const metaDescriptionTravel = "Browse Sam Townsend's travel photography from adv
 const metaOgDescriptionTravel = "Sam Townsend's travel photo gallery.";
 
 const ogUrlHome = 'https://sft3hy.github.io/sam-townsend/'
-const ogUrlAbout = 'https://sft3hy.github.io/sam-townsend/about/'
-const ogUrlContact = 'https://sft3hy.github.io/sam-townsend/contact/'
-const ogUrlPortfolio = 'https://sft3hy.github.io/sam-townsend/portfolio/'
-const ogUrlTravel = 'https://sft3hy.github.io/sam-townsend/travel/'
+const ogUrlAbout = 'https://sft3hy.github.io/sam-townsend/about'
+const ogUrlContact = 'https://sft3hy.github.io/sam-townsend/contact'
+const ogUrlPortfolio = 'https://sft3hy.github.io/sam-townsend/portfolio'
+const ogUrlTravel = 'https://sft3hy.github.io/sam-townsend/travel'
 
 export const routes = [
   {
@@ -52,7 +52,7 @@ export const routes = [
 
   },
   {
-    path: '/about/',
+    path: '/about',
     name: 'About',
     component: About,
     meta: {
@@ -66,7 +66,7 @@ export const routes = [
 
   },
   {
-    path: '/contact/',
+    path: '/contact',
     name: 'Contact',
     component: Contact,
     meta: {
@@ -80,7 +80,7 @@ export const routes = [
 
   },
   {
-    path: '/portfolio/',
+    path: '/portfolio',
     name: 'Portfolio',
     component: Portfolio,
     meta: {
@@ -93,7 +93,7 @@ export const routes = [
     }
   },
   {
-    path: '/travel/',
+    path: '/travel',
     name: 'Travel',
     component: Travel,
     meta: {
